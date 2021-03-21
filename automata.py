@@ -157,6 +157,8 @@ print('c1 = {:.3f}, c2 = {:.3f}, for N = {:d}, p1(inf) = {:.3f}'\
     .format(0.65, 0.70, 400, p1_inf(400, 0.65, 0.70)))
 print("######################################################################################################")
 
+print('Question 2')
+print("######################################################################################################")
 class Krylov():
     def __init__(self, N, c1, c2):
         self.N = N
@@ -216,23 +218,24 @@ class Krylov():
         print('for the final {:d} iterations:'.format(self.iterations - self.ignore_first))
         print('  rewards with action 1: {:d}, action 2: {:d}'.format(self.reward_count[0], self.reward_count[1]))
         print('  performed action 1 {:d} times, action 2 {:d} times'.format(self.action_count[0], self.action_count[1]))
+        print('  performed action 1 {:.1f}%, action 2 {:.1f}%'.format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
         print('')
 
 _N = 4
 _state = _N
 _iterations = 20000
 _ignore_first = 0
-_c1 = 0.45
 _c2 = 0.70
 for i in range(0, 7):
+    _c1 = 0.05 + i/10.0
     automaton = Krylov(_N, _c1, _c2)
     automaton.run(_iterations, _ignore_first, _state)
     automaton.print_results()
     automaton = Tsetlin(_N, _c1/2, _c2/2)
     automaton.run(_iterations, _ignore_first, _state)
     automaton.print_results()
-    _N +=3
     print("*************")
+print("######################################################################################################")
 
 total = 0
 for i in range(0,100):
