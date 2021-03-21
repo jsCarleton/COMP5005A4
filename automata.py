@@ -1,21 +1,34 @@
 import random
 
+######################## Assignment 4 Question 1 ########################
+# A class to implement a two action Tsetlin automaton
+# Constructor arguments are:
+# N - the depth of the automaton
+# c1, c2 - the penalty probabilities for each action
 class Tsetlin():
+    # Constructor
+    # Additional state, beyond the constructor parameters, for this object:
+    # c - an array with the penalty probabilities (for convenience)
+    # iterations - number of times the model was run 
+    # reward_count - number of times a given action was rewarded
+    # action_count - number of times a given action was performed
+    # ignore_first - numer of iterations to ignore for counting purposes
     def __init__(self, N, c1, c2):
         self.N = N
         self.c1 = c1
         self.c2 = c2
         self.c = [c1, c2]
+        self.iterations = 0
         self.reward_count = [0, 0]
         self.action_count = [0, 0]
         self.ignore_first = 0
-        
-    def p1_inf(self):
-        d1 = 1 - self.c1
-        d2 = 1 - self.c2
-        return 1.0/( 1 + (self.c1/self.c2)**self.N *((self.c1-d1)/(self.c2-d2))\
-            * ((self.c2**self.N-d2**self.N)/(self.c1**self.N-d1**self.N)))
-
+ 
+    # next_state function
+    # given:
+    # state - current state
+    # beta - action outcome, 0 for reward, 1 for penalty
+    # return:
+    # new state       
     def next_state(self, state, beta):
         if beta == 0:
             if state != 1 and state != self.N+1:
@@ -30,18 +43,32 @@ class Tsetlin():
                     state = self.N
         return state
 
+    # reward function
+    # given:
+    # action - 0 for action 1, 1 for action 2
+    # return:
+    # the reward determined by the action and the penalty probabilities
     def reward(self, action):
         if random.uniform(0, 1) < self.c[action]:
             return 1
         else:
             return 0
 
+    # action function
+    # given:
+    # state - the current state
+    # return:
+    # the action to be taken
     def action(self, state):
         if state <= self.N:
             return 0
         else:
             return 1
-
+    # run the automaton
+    # given:
+    # iterations - number of times to run the automaton
+    # ignore_first - the number of runs to ignore for reporting purposes
+    # state - initial state of the automaton
     def run(self, iterations, ignore_first, state):
         self.iterations = iterations
         self.ignore_first = ignore_first
@@ -53,7 +80,8 @@ class Tsetlin():
                 self.action_count[alpha] += 1
                 if beta == 0:
                     self.reward_count[alpha] += 1
-                
+     
+    # print the results of running the automaton           
     def print_results(self):
         print('For the Tsetlin model')
         print('---------------------')
@@ -61,32 +89,41 @@ class Tsetlin():
         print('for the final {:d} iterations:'.format(self.iterations - self.ignore_first))
         print('  rewards with action 1: {:d}, action 2: {:d}'.format(self.reward_count[0], self.reward_count[1]))
         print('  performed action 1 {:d} times, action 2 {:d} times'.format(self.action_count[0], self.action_count[1]))
+        print('  performed action 1 {:.1f}%, action 2 {:.1f}%'.format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
         print('')
 
-_N = 8
-_state = _N
+print("Question 1 a)")
+print("######################################################################################################")
+_N = 4
 _iterations = 20000
-_ignore_first = 1000
+_ignore_first = 0
 _c1 = 0.05
 _c2 = 0.70
 for i in range(0, 7):
     automaton = Tsetlin(_N, _c1 + i/10.0, _c2)
-    automaton.run(_iterations, _ignore_first, _state)
+    automaton.run(_iterations, _ignore_first, int(1 + random.uniform(0.0, 1.0)*2*_N))
     automaton.print_results()
+print("######################################################################################################")
+
+def p1_inf(N, c1, c2):
+    d1 = 1 - c1
+    d2 = 1 - c2
+    return 1.0/( 1 + (c1/c2)**N *((c1-d1)/(c2-d2))\
+        * ((c2**N-d2**N)/(c1**N-d1**N)))
 
 def binary_search(Nmin, Nmax, c1, c2, threshold):
     if Nmin == Nmax-1:
-        automaton = Tsetlin(Nmin, c1, c2)
-        if automaton.p1_inf() > threshold:
+        if p1_inf(Nmin, c1, c2) > threshold:
             return Nmin
         else:
             return Nmax
-    automaton = Tsetlin(Nmin + (Nmax - Nmin)//2, c1, c2)
-    if automaton.p1_inf() < threshold:
+    if p1_inf(Nmin + (Nmax - Nmin)//2, c1, c2) < threshold:
         return binary_search(Nmin + (Nmax - Nmin)//2, Nmax, c1, c2, threshold)
     else:
         return binary_search(Nmin, Nmax - (Nmax - Nmin)//2, c1, c2, threshold)
 
+print('Question 1 b)')
+print("######################################################################################################")
 _threshold = 0.95  
 _c2 = 0.70
 for i in range (0, 7):
@@ -95,22 +132,30 @@ for i in range (0, 7):
         _Nmin = 1
         _Nmax = 2
         # find an Nmax that gives > 95% accuracy
-        automaton = Tsetlin(_Nmax, _c1, _c2)
-        while automaton.p1_inf() < _threshold:
+        while p1_inf(_Nmax, _c1, _c2) < _threshold:
             _Nmax *= 2
-            automaton = Tsetlin(_Nmax, _c1, _c2)
         # now do a binary search to find the precise N required
         # for accuracy > 0.95
-        print('c1 = {:.3f}, c2 = {:.3f}, for N = {:d}, p1(inf) >= {:.3f}'                  .format(_c1, _c2, binary_search(_Nmin, _Nmax, _c1, _c2, _threshold), _threshold))
+        _N =  binary_search(_Nmin, _Nmax, _c1, _c2, _threshold)
+        print('c1 = {:.3f}, c2 = {:.3f}, for N = {:d}, p1(inf) = {:.3f}'\
+            .format(_c1, _c2, _N, p1_inf(_N, _c1, _c2)))
     else:
         print(_c1, _c2, "no solution")
+print("######################################################################################################")
 
+print('Question 1 c)')
+print("######################################################################################################")
 limit = [2,2,3,5,9,100,400]
 for i in range (0,7):
     _c1 = 0.05 + i/10.0
     automaton = Tsetlin(limit[i], _c1, _c2)
-    automaton.run(20000, 1000, limit[i])
+    automaton.run(20000, 0, limit[i])
     automaton.print_results()
+print('c1 = {:.3f}, c2 = {:.3f}, for N = {:d}, p1(inf) = {:.3f}'\
+    .format(0.55, 0.70, 100, p1_inf(100, 0.55, 0.70)))
+print('c1 = {:.3f}, c2 = {:.3f}, for N = {:d}, p1(inf) = {:.3f}'\
+    .format(0.65, 0.70, 400, p1_inf(400, 0.65, 0.70)))
+print("######################################################################################################")
 
 class Krylov():
     def __init__(self, N, c1, c2):
@@ -196,7 +241,7 @@ for i in range(0,100):
     total += automaton.action_count[0]
 
 automaton = Tsetlin(4, 0.225, 0.35)
-print(automaton.p1_inf())
+print(p1_inf(4, 0.225, 0.35))
 
 
 for i in range(0,3):
@@ -268,7 +313,7 @@ class L_RI():
         print('for the final {:d} iterations:'.format(self.iterations - self.ignore_first))
         print('  rewards with action 1: {:d}, action 2: {:d}'.format(self.reward_count[0], self.reward_count[1]))
         print('  performed action 1 {:d} times, action 2 {:d} times'.format(self.action_count[0], self.action_count[1]))
-        print('  performed action 1 {:.1f}%, action 2 {:.1f}%'              .format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
+        print('  performed action 1 {:.1f}%, action 2 {:.1f}%'.format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
         print('  final p1: {:.4f} final p2: {:.4f}'.format(self.p1, self.p2))
         print('')
 
