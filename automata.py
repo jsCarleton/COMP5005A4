@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import random
 
 class Tsetlin():
@@ -19,7 +13,8 @@ class Tsetlin():
     def p1_inf(self):
         d1 = 1 - self.c1
         d2 = 1 - self.c2
-        return 1.0/             ( 1 + (self.c1/self.c2)**self.N *                      ((self.c1-d1)/(self.c2-d2)) *                      ((self.c2**self.N-d2**self.N)/(self.c1**self.N-d1**self.N)))
+        return 1.0/( 1 + (self.c1/self.c2)**self.N *((self.c1-d1)/(self.c2-d2))\
+            * ((self.c2**self.N-d2**self.N)/(self.c1**self.N-d1**self.N)))
 
     def next_state(self, state, beta):
         if beta == 0:
@@ -79,10 +74,6 @@ for i in range(0, 7):
     automaton.run(_iterations, _ignore_first, _state)
     automaton.print_results()
 
-
-# In[2]:
-
-
 def binary_search(Nmin, Nmax, c1, c2, threshold):
     if Nmin == Nmax-1:
         automaton = Tsetlin(Nmin, c1, c2)
@@ -113,12 +104,6 @@ for i in range (0, 7):
         print('c1 = {:.3f}, c2 = {:.3f}, for N = {:d}, p1(inf) >= {:.3f}'                  .format(_c1, _c2, binary_search(_Nmin, _Nmax, _c1, _c2, _threshold), _threshold))
     else:
         print(_c1, _c2, "no solution")
-    
-    
-
-
-# In[3]:
-
 
 limit = [2,2,3,5,9,100,400]
 for i in range (0,7):
@@ -126,12 +111,6 @@ for i in range (0,7):
     automaton = Tsetlin(limit[i], _c1, _c2)
     automaton.run(20000, 1000, limit[i])
     automaton.print_results()
-
-
-# In[142]:
-
-
-import random
 
 class Krylov():
     def __init__(self, N, c1, c2):
@@ -194,10 +173,6 @@ class Krylov():
         print('  performed action 1 {:d} times, action 2 {:d} times'.format(self.action_count[0], self.action_count[1]))
         print('')
 
-
-# In[148]:
-
-
 _N = 4
 _state = _N
 _iterations = 20000
@@ -214,27 +189,14 @@ for i in range(0, 7):
     _N +=3
     print("*************")
 
-
-# In[28]:
-
-
 total = 0
 for i in range(0,100):
     automaton = Tsetlin(4, 0.225, 0.35)
     automaton.run(20000, 19000, 4)
-#    print(automaton.action_count[0])
-#    automaton.print_results()
     total += automaton.action_count[0]
-
-
-# In[24]:
-
 
 automaton = Tsetlin(4, 0.225, 0.35)
 print(automaton.p1_inf())
-
-
-# In[20]:
 
 
 for i in range(0,3):
@@ -242,25 +204,11 @@ for i in range(0,3):
     automaton.run(20000, 19000, 4)
     automaton.print_results()
 
-
-# In[29]:
-
-
 print(total/100)
-
-
-# In[154]:
-
 
 automaton = Krylov(5, 0.45, 0.7)
 automaton.run(20000, 0, 7)
 automaton.print_results()
-
-
-# In[214]:
-
-
-import random
 
 class L_RI():
     def __init__(self, N, c1, c2, lambda_r):
@@ -324,23 +272,6 @@ class L_RI():
         print('  final p1: {:.4f} final p2: {:.4f}'.format(self.p1, self.p2))
         print('')
 
-
-# In[220]:
-
-
 automaton = L_RI(5, 0.45, 0.7, 0.3)
 automaton.run(91, 0)
 automaton.print_results()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
