@@ -251,16 +251,13 @@ class L_RI():
         self.p2 = 0.5
         self.lambda_r = lambda_r
         
-    def update_p_values(self, action, beta):
+     def update_p_values(self, action, beta):
         if beta == 0:
             if action == 0:
-                delta = self.lambda_r*self.p2
-                self.p2 = self.p2 - delta
-                self.p1 = self.p1 + delta
+                self.p1 = self.p1 + self.lambda_r*(1 - self.p1)
             else:
-                delta = self.lambda_r*self.p1
-                self.p1 = self.p1 - delta
-                self.p2 = self.p2 + delta
+                self.p1 = (1 - self.lambda_r)*self.p1
+            self.p2 = 1 - self.p1
         else:
             # no change when beta == 1
             pass
@@ -289,6 +286,19 @@ class L_RI():
                 if beta == 0:
                     self.reward_count[alpha] += 1
                 
+    def run_until(self, threshold, ignore_first):
+        self.iterations = 0
+        self.ignore_first = ignore_first
+        while self.p1 < threshold and self.p2 < threshold:
+            alpha = self.action()
+            beta = self.reward(alpha)
+            self.update_p_values(alpha, beta)
+            if self.iterations >= ignore_first:
+                self.action_count[alpha] += 1
+                if beta == 0:
+                    self.reward_count[alpha] += 1
+            self.iterations += 1
+
     def print_results(self):
         print('For the L_RI model')
         print('------------------')
@@ -307,6 +317,6 @@ _c2 = 0.70
 for i in range(0, 7):
     _c1 = 0.05 + i/10.0
     automaton = L_RI(_c1, _c2, _lambda_r)
-    automaton.run(_iterations, 0)
+    automaton.run_until(0.95, 0)
     automaton.print_results()
 print("######################################################################################################")
