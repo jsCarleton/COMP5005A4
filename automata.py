@@ -319,4 +319,56 @@ for i in range(0, 7):
     automaton = L_RI(_c1, _c2, _lambda_r)
     automaton.run_until(0.95, 0)
     automaton.print_results()
+    
+def binary_lsearch(lambda_min, lambda_max, c1, c2, threshold):
+    # create and run the L_RI for the minimum lambda
+    a1 = L_RI(c1, c2, lambda_min)
+    a1.run_until(threshold, 0)
+    # create and run the L_RI for the maximum lambda
+    a2 = L_RI(c1, c2, lambda_max)
+    a2.run_until(threshold, 0)
+    # are we done searching?
+    if lambda_max - lambda_min < 0.01:
+        # yes, which one had fewer iterations
+        if a1.iterations < a2.iterations:
+            # the lower bound
+            return lambda_min, a1.iterations
+        else:
+            # the upper bound
+            return lambda_max, a2.iterations
+    # the lambdas haven't converged yet
+    # which one produced few iterations?
+    if a1.iterations < a2.iterations:
+        # the lower bound
+        return binary_lsearch(lambda_min, lambda_max - (lambda_max - lambda_min)/2.0, c1, c2, threshold)
+    else:
+        # the upper bound
+        return binary_lsearch(lambda_min + (lambda_max - lambda_min)/2.0, lambda_max, c1, c2, threshold)
+
+_c2 = 0.70
+_lambda_min = 0.1
+_lambda_max = 0.9
+_threshold = 0.99
+for i in range(0, 7):
+    lambdas = 0
+    iters = 0
+    _c1 = 0.05 + i/10.0
+    for j in range(0, 10000):
+        l, n = binary_lsearch(_lambda_min, _lambda_max, _c1, _c2, _threshold)
+        lambdas += l
+        iters += n
+    print("L_RI optimal lambda_r is {:.3f} for c1={:.2f}, c2={:.2f} in {:d} iterations"\
+              .format(lambdas/(j+1), _c1, _c2, iters//(j+1)))
+              
+count = [0,0]
+its = 0
+for i in range(0,1000):
+    a = L_RI(0.65, 0.70, 0.86)
+    a.run_until(0.98, 0)
+    if a.p1 > a.p2:
+        count[0] += 1
+    else:
+        count[1] += 1
+    its += a.iterations
+print(count[0], count[1], its/1000)
 print("######################################################################################################")
