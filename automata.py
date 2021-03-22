@@ -237,30 +237,10 @@ for i in range(0, 7):
     print("*************")
 print("######################################################################################################")
 
-total = 0
-for i in range(0,100):
-    automaton = Tsetlin(4, 0.225, 0.35)
-    automaton.run(20000, 19000, 4)
-    total += automaton.action_count[0]
-
-automaton = Tsetlin(4, 0.225, 0.35)
-print(p1_inf(4, 0.225, 0.35))
-
-
-for i in range(0,3):
-    automaton = Krylov(4, 0.45, 0.7)
-    automaton.run(20000, 19000, 4)
-    automaton.print_results()
-
-print(total/100)
-
-automaton = Krylov(5, 0.45, 0.7)
-automaton.run(20000, 0, 7)
-automaton.print_results()
-
+print('Question 3 a)')
+print("######################################################################################################")
 class L_RI():
-    def __init__(self, N, c1, c2, lambda_r):
-        self.N = N
+    def __init__(self, c1, c2, lambda_r):
         self.c1 = c1
         self.c2 = c2
         self.c = [c1, c2]
@@ -311,8 +291,8 @@ class L_RI():
                 
     def print_results(self):
         print('For the L_RI model')
-        print('--------------------')
-        print('N = {:d}, c1 = {:.3f}, c2 = {:.3f}'.format(self.N, self.c1, self.c2))
+        print('------------------')
+        print('lambda_R = {:.3f}, c1 = {:.3f}, c2 = {:.3f}'.format(self.lambda_r, self.c1, self.c2))
         print('for the final {:d} iterations:'.format(self.iterations - self.ignore_first))
         print('  rewards with action 1: {:d}, action 2: {:d}'.format(self.reward_count[0], self.reward_count[1]))
         print('  performed action 1 {:d} times, action 2 {:d} times'.format(self.action_count[0], self.action_count[1]))
@@ -320,6 +300,13 @@ class L_RI():
         print('  final p1: {:.4f} final p2: {:.4f}'.format(self.p1, self.p2))
         print('')
 
-automaton = L_RI(5, 0.45, 0.7, 0.3)
-automaton.run(91, 0)
-automaton.print_results()
+_lambda_r = 0.3
+_iterations = 25
+_ignore_first = 0
+_c2 = 0.70
+for i in range(0, 7):
+    _c1 = 0.05 + i/10.0
+    automaton = L_RI(_c1, _c2, _lambda_r)
+    automaton.run(_iterations, 0)
+    automaton.print_results()
+print("######################################################################################################")

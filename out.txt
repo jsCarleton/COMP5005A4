@@ -4,57 +4,57 @@ For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.050, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 18994, action 2: 0
-  performed action 1 19999 times, action 2 1 times
+  rewards with action 1: 19006, action 2: 0
+  performed action 1 20000 times, action 2 0 times
   performed action 1 100.0%, action 2 0.0%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.150, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 16943, action 2: 2
-  performed action 1 19983 times, action 2 17 times
+  rewards with action 1: 16907, action 2: 3
+  performed action 1 19984 times, action 2 16 times
   performed action 1 99.9%, action 2 0.1%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.250, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 14779, action 2: 109
-  performed action 1 19648 times, action 2 352 times
-  performed action 1 98.2%, action 2 1.8%
+  rewards with action 1: 14868, action 2: 60
+  performed action 1 19770 times, action 2 230 times
+  performed action 1 98.8%, action 2 1.1%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.350, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 12061, action 2: 391
-  performed action 1 18671 times, action 2 1329 times
-  performed action 1 93.4%, action 2 6.6%
+  rewards with action 1: 12039, action 2: 445
+  performed action 1 18602 times, action 2 1398 times
+  performed action 1 93.0%, action 2 7.0%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.450, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 9129, action 2: 1037
-  performed action 1 16600 times, action 2 3400 times
-  performed action 1 83.0%, action 2 17.0%
+  rewards with action 1: 9172, action 2: 926
+  performed action 1 16795 times, action 2 3205 times
+  performed action 1 84.0%, action 2 16.0%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.550, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 6233, action 2: 1857
-  performed action 1 13843 times, action 2 6157 times
-  performed action 1 69.2%, action 2 30.8%
+  rewards with action 1: 6356, action 2: 1828
+  performed action 1 13979 times, action 2 6021 times
+  performed action 1 69.9%, action 2 30.1%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.650, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 3748, action 2: 2795
-  performed action 1 10900 times, action 2 9100 times
-  performed action 1 54.5%, action 2 45.5%
+  rewards with action 1: 3925, action 2: 2722
+  performed action 1 11101 times, action 2 8899 times
+  performed action 1 55.5%, action 2 44.5%
 
 ######################################################################################################
 Question 1 b)
@@ -73,57 +73,57 @@ For the Tsetlin model
 ---------------------
 N = 2, c1 = 0.050, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 18934, action 2: 31
-  performed action 1 19903 times, action 2 97 times
-  performed action 1 99.5%, action 2 0.5%
+  rewards with action 1: 18882, action 2: 36
+  performed action 1 19878 times, action 2 122 times
+  performed action 1 99.4%, action 2 0.6%
 
 For the Tsetlin model
 ---------------------
 N = 2, c1 = 0.150, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 16301, action 2: 270
-  performed action 1 19132 times, action 2 868 times
+  rewards with action 1: 16210, action 2: 250
+  performed action 1 19149 times, action 2 851 times
   performed action 1 95.7%, action 2 4.3%
 
 For the Tsetlin model
 ---------------------
 N = 3, c1 = 0.250, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 14404, action 2: 218
-  performed action 1 19212 times, action 2 788 times
-  performed action 1 96.1%, action 2 3.9%
+  rewards with action 1: 14385, action 2: 239
+  performed action 1 19185 times, action 2 815 times
+  performed action 1 95.9%, action 2 4.1%
 
 For the Tsetlin model
 ---------------------
 N = 5, c1 = 0.350, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 12629, action 2: 172
-  performed action 1 19399 times, action 2 601 times
-  performed action 1 97.0%, action 2 3.0%
+  rewards with action 1: 12562, action 2: 186
+  performed action 1 19350 times, action 2 650 times
+  performed action 1 96.8%, action 2 3.2%
 
 For the Tsetlin model
 ---------------------
 N = 9, c1 = 0.450, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 10285, action 2: 290
-  performed action 1 18979 times, action 2 1021 times
-  performed action 1 94.9%, action 2 5.1%
+  rewards with action 1: 10385, action 2: 341
+  performed action 1 18900 times, action 2 1100 times
+  performed action 1 94.5%, action 2 5.5%
 
 For the Tsetlin model
 ---------------------
 N = 100, c1 = 0.550, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 7331, action 2: 1165
-  performed action 1 16164 times, action 2 3836 times
-  performed action 1 80.8%, action 2 19.2%
+  rewards with action 1: 7112, action 2: 1277
+  performed action 1 15830 times, action 2 4170 times
+  performed action 1 79.2%, action 2 20.9%
 
 For the Tsetlin model
 ---------------------
 N = 400, c1 = 0.650, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 3960, action 2: 2529
-  performed action 1 11431 times, action 2 8569 times
-  performed action 1 57.2%, action 2 42.8%
+  rewards with action 1: 4198, action 2: 2479
+  performed action 1 11719 times, action 2 8281 times
+  performed action 1 58.6%, action 2 41.4%
 
 c1 = 0.550, c2 = 0.700, for N = 100, p1(inf) = 0.800
 c1 = 0.650, c2 = 0.700, for N = 400, p1(inf) = 0.571
@@ -134,7 +134,7 @@ For the Krylov model
 --------------------
 N = 4, c1 = 0.050, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 18953, action 2: 0
+  rewards with action 1: 18961, action 2: 0
   performed action 1 20000 times, action 2 0 times
   performed action 1 100.0%, action 2 0.0%
 
@@ -142,7 +142,7 @@ For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.025, c2 = 0.350
 for the final 20000 iterations:
-  rewards with action 1: 19504, action 2: 0
+  rewards with action 1: 19462, action 2: 0
   performed action 1 20000 times, action 2 0 times
   performed action 1 100.0%, action 2 0.0%
 
@@ -151,16 +151,16 @@ For the Krylov model
 --------------------
 N = 4, c1 = 0.150, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 17017, action 2: 0
-  performed action 1 20000 times, action 2 0 times
+  rewards with action 1: 16952, action 2: 0
+  performed action 1 19999 times, action 2 1 times
   performed action 1 100.0%, action 2 0.0%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.075, c2 = 0.350
 for the final 20000 iterations:
-  rewards with action 1: 18503, action 2: 0
-  performed action 1 20000 times, action 2 0 times
+  rewards with action 1: 18512, action 2: 0
+  performed action 1 19999 times, action 2 1 times
   performed action 1 100.0%, action 2 0.0%
 
 *************
@@ -168,128 +168,151 @@ For the Krylov model
 --------------------
 N = 4, c1 = 0.250, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 14928, action 2: 36
-  performed action 1 19881 times, action 2 119 times
-  performed action 1 99.4%, action 2 0.6%
+  rewards with action 1: 14584, action 2: 172
+  performed action 1 19460 times, action 2 540 times
+  performed action 1 97.3%, action 2 2.7%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.125, c2 = 0.350
 for the final 20000 iterations:
-  rewards with action 1: 17485, action 2: 38
-  performed action 1 19944 times, action 2 56 times
-  performed action 1 99.7%, action 2 0.3%
+  rewards with action 1: 17198, action 2: 276
+  performed action 1 19596 times, action 2 404 times
+  performed action 1 98.0%, action 2 2.0%
 
 *************
 For the Krylov model
 --------------------
 N = 4, c1 = 0.350, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 12414, action 2: 261
-  performed action 1 19149 times, action 2 851 times
-  performed action 1 95.7%, action 2 4.3%
+  rewards with action 1: 12392, action 2: 303
+  performed action 1 19048 times, action 2 952 times
+  performed action 1 95.2%, action 2 4.8%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.175, c2 = 0.350
 for the final 20000 iterations:
-  rewards with action 1: 15911, action 2: 472
-  performed action 1 19275 times, action 2 725 times
-  performed action 1 96.4%, action 2 3.6%
+  rewards with action 1: 15828, action 2: 564
+  performed action 1 19122 times, action 2 878 times
+  performed action 1 95.6%, action 2 4.4%
 
 *************
 For the Krylov model
 --------------------
 N = 4, c1 = 0.450, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 9524, action 2: 828
-  performed action 1 17303 times, action 2 2697 times
-  performed action 1 86.5%, action 2 13.5%
+  rewards with action 1: 9564, action 2: 782
+  performed action 1 17422 times, action 2 2578 times
+  performed action 1 87.1%, action 2 12.9%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.225, c2 = 0.350
 for the final 20000 iterations:
-  rewards with action 1: 13937, action 2: 1411
-  performed action 1 17855 times, action 2 2145 times
-  performed action 1 89.3%, action 2 10.7%
+  rewards with action 1: 13807, action 2: 1451
+  performed action 1 17789 times, action 2 2211 times
+  performed action 1 88.9%, action 2 11.1%
 
 *************
 For the Krylov model
 --------------------
 N = 4, c1 = 0.550, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 7288, action 2: 1161
-  performed action 1 16078 times, action 2 3922 times
-  performed action 1 80.4%, action 2 19.6%
+  rewards with action 1: 6618, action 2: 1468
+  performed action 1 14971 times, action 2 5029 times
+  performed action 1 74.9%, action 2 25.1%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.275, c2 = 0.350
 for the final 20000 iterations:
-  rewards with action 1: 10352, action 2: 3783
-  performed action 1 14249 times, action 2 5751 times
-  performed action 1 71.2%, action 2 28.8%
+  rewards with action 1: 11213, action 2: 2943
+  performed action 1 15472 times, action 2 4528 times
+  performed action 1 77.4%, action 2 22.6%
 
 *************
 For the Krylov model
 --------------------
 N = 4, c1 = 0.650, c2 = 0.700
 for the final 20000 iterations:
-  rewards with action 1: 4302, action 2: 2415
-  performed action 1 12074 times, action 2 7926 times
-  performed action 1 60.4%, action 2 39.6%
+  rewards with action 1: 4529, action 2: 2162
+  performed action 1 12794 times, action 2 7206 times
+  performed action 1 64.0%, action 2 36.0%
 
 For the Tsetlin model
 ---------------------
 N = 4, c1 = 0.325, c2 = 0.350
 for the final 20000 iterations:
-  rewards with action 1: 8403, action 2: 4884
-  performed action 1 12455 times, action 2 7545 times
-  performed action 1 62.3%, action 2 37.7%
+  rewards with action 1: 7446, action 2: 5818
+  performed action 1 11057 times, action 2 8943 times
+  performed action 1 55.3%, action 2 44.7%
 
 *************
 ######################################################################################################
-0.8749484379068246
-For the Krylov model
---------------------
-N = 4, c1 = 0.450, c2 = 0.700
-for the final 1000 iterations:
-  rewards with action 1: 454, action 2: 42
-  performed action 1 873 times, action 2 127 times
-  performed action 1 4.4%, action 2 0.6%
-
-For the Krylov model
---------------------
-N = 4, c1 = 0.450, c2 = 0.700
-for the final 1000 iterations:
-  rewards with action 1: 458, action 2: 40
-  performed action 1 867 times, action 2 133 times
-  performed action 1 4.3%, action 2 0.7%
-
-For the Krylov model
---------------------
-N = 4, c1 = 0.450, c2 = 0.700
-for the final 1000 iterations:
-  rewards with action 1: 376, action 2: 95
-  performed action 1 710 times, action 2 290 times
-  performed action 1 3.5%, action 2 1.4%
-
-872.21
-For the Krylov model
---------------------
-N = 5, c1 = 0.450, c2 = 0.700
-for the final 20000 iterations:
-  rewards with action 1: 9491, action 2: 798
-  performed action 1 17329 times, action 2 2671 times
-  performed action 1 86.6%, action 2 13.4%
+Question 3 a)
+######################################################################################################
+For the L_RI model
+------------------
+lambda_R = 0.300, c1 = 0.050, c2 = 0.700
+for the final 25 iterations:
+  rewards with action 1: 21, action 2: 0
+  performed action 1 24 times, action 2 1 times
+  performed action 1 96.0%, action 2 4.0%
+  final p1: 0.9997 final p2: 0.0003
 
 For the L_RI model
---------------------
-N = 5, c1 = 0.450, c2 = 0.700
-for the final 91 iterations:
-  rewards with action 1: 58, action 2: 2
-  performed action 1 84 times, action 2 7 times
-  performed action 1 92.3%, action 2 7.7%
-  final p1: 1.0000 final p2: 0.0000
+------------------
+lambda_R = 0.300, c1 = 0.150, c2 = 0.700
+for the final 25 iterations:
+  rewards with action 1: 17, action 2: 0
+  performed action 1 20 times, action 2 5 times
+  performed action 1 80.0%, action 2 20.0%
+  final p1: 0.9988 final p2: 0.0012
 
+For the L_RI model
+------------------
+lambda_R = 0.300, c1 = 0.250, c2 = 0.700
+for the final 25 iterations:
+  rewards with action 1: 16, action 2: 3
+  performed action 1 19 times, action 2 6 times
+  performed action 1 76.0%, action 2 24.0%
+  final p1: 0.9876 final p2: 0.0124
+
+For the L_RI model
+------------------
+lambda_R = 0.300, c1 = 0.350, c2 = 0.700
+for the final 25 iterations:
+  rewards with action 1: 5, action 2: 7
+  performed action 1 6 times, action 2 19 times
+  performed action 1 24.0%, action 2 76.0%
+  final p1: 0.3577 final p2: 0.6423
+
+For the L_RI model
+------------------
+lambda_R = 0.300, c1 = 0.450, c2 = 0.700
+for the final 25 iterations:
+  rewards with action 1: 3, action 2: 5
+  performed action 1 10 times, action 2 15 times
+  performed action 1 40.0%, action 2 60.0%
+  final p1: 0.2726 final p2: 0.7274
+
+For the L_RI model
+------------------
+lambda_R = 0.300, c1 = 0.550, c2 = 0.700
+for the final 25 iterations:
+  rewards with action 1: 2, action 2: 4
+  performed action 1 10 times, action 2 15 times
+  performed action 1 40.0%, action 2 60.0%
+  final p1: 0.1813 final p2: 0.8187
+
+For the L_RI model
+------------------
+lambda_R = 0.300, c1 = 0.650, c2 = 0.700
+for the final 25 iterations:
+  rewards with action 1: 0, action 2: 8
+  performed action 1 3 times, action 2 22 times
+  performed action 1 12.0%, action 2 88.0%
+  final p1: 0.0288 final p2: 0.9712
+
+######################################################################################################
