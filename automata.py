@@ -12,7 +12,6 @@ class Tsetlin():
     # iterations - number of times the model was run 
     # reward_count - number of times a given action was rewarded
     # action_count - number of times a given action was performed
-    # ignore_first - numer of iterations to ignore for counting purposes
     def __init__(self, N, c1, c2):
         self.N = N
         self.c1 = c1
@@ -21,7 +20,6 @@ class Tsetlin():
         self.iterations = 0
         self.reward_count = [0, 0]
         self.action_count = [0, 0]
-        self.ignore_first = 0
  
     # next_state function
     # given:
@@ -67,41 +65,38 @@ class Tsetlin():
     # run the automaton
     # given:
     # iterations - number of times to run the automaton
-    # ignore_first - the number of runs to ignore for reporting purposes
     # state - initial state of the automaton
-    def run(self, iterations, ignore_first, state):
+    def run(self, iterations, state):
         self.iterations = iterations
-        self.ignore_first = ignore_first
         for n in range(0, iterations):
             alpha = self.action(state)
             beta = self.reward(alpha)
             state = self.next_state(state, beta)
-            if n >= ignore_first:
-                self.action_count[alpha] += 1
-                if beta == 0:
-                    self.reward_count[alpha] += 1
+            self.action_count[alpha] += 1
+            if beta == 0:
+                self.reward_count[alpha] += 1
      
     # print the results of running the automaton           
     def print_results(self):
         print('For the Tsetlin model')
         print('---------------------')
         print('N = {:d}, c1 = {:.3f}, c2 = {:.3f}'.format(self.N, self.c1, self.c2))
-        print('for the final {:d} iterations:'.format(self.iterations - self.ignore_first))
+        print('for the final {:d} iterations:'.format(self.iterations))
         print('  rewards with action 1: {:d}, action 2: {:d}'.format(self.reward_count[0], self.reward_count[1]))
         print('  performed action 1 {:d} times, action 2 {:d} times'.format(self.action_count[0], self.action_count[1]))
-        print('  performed action 1 {:.1f}%, action 2 {:.1f}%'.format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
+        print('  performed action 1 {:.1f}%, action 2 {:.1f}%'\
+            .format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
         print('')
 
 print("Question 1 a)")
 print("######################################################################################################")
 _N = 4
 _iterations = 20000
-_ignore_first = 0
 _c1 = 0.05
 _c2 = 0.70
 for i in range(0, 7):
     automaton = Tsetlin(_N, _c1 + i/10.0, _c2)
-    automaton.run(_iterations, _ignore_first, int(1 + random.uniform(0.0, 1.0)*2*_N))
+    automaton.run(_iterations, int(1 + random.uniform(0.0, 1.0)*2*_N))
     automaton.print_results()
 print("######################################################################################################")
 
@@ -149,7 +144,7 @@ limit = [2,2,3,5,9,100,400]
 for i in range (0,7):
     _c1 = 0.05 + i/10.0
     automaton = Tsetlin(limit[i], _c1, _c2)
-    automaton.run(20000, 0, limit[i])
+    automaton.run(20000, limit[i])
     automaton.print_results()
 print('c1 = {:.3f}, c2 = {:.3f}, for N = {:d}, p1(inf) = {:.3f}'\
     .format(0.55, 0.70, 100, p1_inf(100, 0.55, 0.70)))
@@ -167,7 +162,6 @@ class Krylov():
         self.c = [c1, c2]
         self.reward_count = [0, 0]
         self.action_count = [0, 0]
-        self.ignore_first = 0
         
     def next_state(self, state, beta):
         if beta == 0:
@@ -199,23 +193,21 @@ class Krylov():
         else:
             return 1
 
-    def run(self, iterations, ignore_first, state):
+    def run(self, iterations, state):
         self.iterations = iterations
-        self.ignore_first = ignore_first
         for n in range(0, iterations):
             alpha = self.action(state)
             beta = self.reward(alpha)
             state = self.next_state(state, beta)
-            if n >= ignore_first:
-                self.action_count[alpha] += 1
-                if beta == 0:
-                    self.reward_count[alpha] += 1
+            self.action_count[alpha] += 1
+            if beta == 0:
+                self.reward_count[alpha] += 1
                 
     def print_results(self):
         print('For the Krylov model')
         print('--------------------')
         print('N = {:d}, c1 = {:.3f}, c2 = {:.3f}'.format(self.N, self.c1, self.c2))
-        print('for the final {:d} iterations:'.format(self.iterations - self.ignore_first))
+        print('for the final {:d} iterations:'.format(self.iterations))
         print('  rewards with action 1: {:d}, action 2: {:d}'.format(self.reward_count[0], self.reward_count[1]))
         print('  performed action 1 {:d} times, action 2 {:d} times'.format(self.action_count[0], self.action_count[1]))
         print('  performed action 1 {:.1f}%, action 2 {:.1f}%'.format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
@@ -224,15 +216,14 @@ class Krylov():
 _N = 4
 _state = _N
 _iterations = 20000
-_ignore_first = 0
 _c2 = 0.70
 for i in range(0, 7):
     _c1 = 0.05 + i/10.0
     automaton = Krylov(_N, _c1, _c2)
-    automaton.run(_iterations, _ignore_first, _state)
+    automaton.run(_iterations, _state)
     automaton.print_results()
     automaton = Tsetlin(_N, _c1/2, _c2/2)
-    automaton.run(_iterations, _ignore_first, _state)
+    automaton.run(_iterations, _state)
     automaton.print_results()
     print("*************")
 print("######################################################################################################")
@@ -240,24 +231,24 @@ print("#########################################################################
 print('Question 3 a)')
 print("######################################################################################################")
 class L_RI():
-    def __init__(self, c1, c2, lambda_r):
+    def __init__(self, c1, c2, k_r):
         self.c1 = c1
         self.c2 = c2
         self.c = [c1, c2]
         self.reward_count = [0, 0]
         self.action_count = [0, 0]
-        self.ignore_first = 0
         self.p1 = 0.5
         self.p2 = 0.5
-        self.lambda_r = lambda_r
+        self.k_r = k_r
         
-     def update_p_values(self, action, beta):
+    def update_p_values(self, action, beta):
         if beta == 0:
             if action == 0:
-                self.p1 = self.p1 + self.lambda_r*(1 - self.p1)
+                self.p2 = self.k_r*self.p2
+                self.p1 = 1 - self.p2
             else:
-                self.p1 = (1 - self.lambda_r)*self.p1
-            self.p2 = 1 - self.p1
+                self.p1 = self.k_r*self.p1
+                self.p2 = 1 - self.p1
         else:
             # no change when beta == 1
             pass
@@ -274,101 +265,108 @@ class L_RI():
         else:
             return 1
 
-    def run(self, iterations, ignore_first):
+    def run(self, iterations):
         self.iterations = iterations
-        self.ignore_first = ignore_first
         for n in range(0, iterations):
             alpha = self.action()
             beta = self.reward(alpha)
             self.update_p_values(alpha, beta)
-            if n >= ignore_first:
-                self.action_count[alpha] += 1
-                if beta == 0:
-                    self.reward_count[alpha] += 1
+            self.action_count[alpha] += 1
+            if beta == 0:
+                self.reward_count[alpha] += 1
                 
-    def run_until(self, threshold, ignore_first):
+    def run_until(self, threshold):
         self.iterations = 0
-        self.ignore_first = ignore_first
         while self.p1 < threshold and self.p2 < threshold:
             alpha = self.action()
             beta = self.reward(alpha)
             self.update_p_values(alpha, beta)
-            if self.iterations >= ignore_first:
-                self.action_count[alpha] += 1
-                if beta == 0:
-                    self.reward_count[alpha] += 1
+            self.action_count[alpha] += 1
+            if beta == 0:
+                self.reward_count[alpha] += 1
             self.iterations += 1
 
     def print_results(self):
         print('For the L_RI model')
         print('------------------')
-        print('lambda_R = {:.3f}, c1 = {:.3f}, c2 = {:.3f}'.format(self.lambda_r, self.c1, self.c2))
-        print('for the final {:d} iterations:'.format(self.iterations - self.ignore_first))
-        print('  rewards with action 1: {:d}, action 2: {:d}'.format(self.reward_count[0], self.reward_count[1]))
-        print('  performed action 1 {:d} times, action 2 {:d} times'.format(self.action_count[0], self.action_count[1]))
-        print('  performed action 1 {:.1f}%, action 2 {:.1f}%'.format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
+        print('k_r = {:.3f}, c1 = {:.3f}, c2 = {:.3f}'.format(self.k_r, self.c1, self.c2))
+        print('for the final {:d} iterations:'.format(self.iterations))
+        print('  rewards with action 1: {:d}, action 2: {:d}'\
+              .format(self.reward_count[0], self.reward_count[1]))
+        print('  performed action 1 {:d} times, action 2 {:d} times'\
+              .format(self.action_count[0], self.action_count[1]))
+        print('  performed action 1 {:.1f}%, action 2 {:.1f}%'\
+              .format(self.action_count[0]*100.0/self.iterations, self.action_count[1]*100.0/self.iterations))
         print('  final p1: {:.4f} final p2: {:.4f}'.format(self.p1, self.p2))
         print('')
 
-_lambda_r = 0.3
+_k_r = 0.7
 _iterations = 25
-_ignore_first = 0
 _c2 = 0.70
 for i in range(0, 7):
     _c1 = 0.05 + i/10.0
-    automaton = L_RI(_c1, _c2, _lambda_r)
-    automaton.run_until(0.95, 0)
+    automaton = L_RI(_c1, _c2, _k_r)
+    automaton.run_until(0.95)
     automaton.print_results()
+
+print('Question 3 b)')
+print("######################################################################################################")
+
+# get_success_rate
+# a function to measure the success rate of an L_RI automaton
+# given:
+#   c1, c2, k_r: the automaton parameters
+#   iterations: the number of iterations to test the automaton
+#   convergence_threshold: the value at which we consider the automaton to convergence_threshold
+# returns:
+#   a pair made up of the success rate, and the average number of iterations to converge    
+def get_success_rate(c1, c2, k_r, iterations, convergence_threshold):
+    a_success = 0
+    a_iterations = 0
+    for i in range(0, iterations):
+        a = L_RI(c1, c2, k_r)
+        a.run_until(convergence_threshold)
+        if a.p1 > a.p2:
+            a_success += 1
+        a_iterations += a.iterations
+    return a_success/iterations, a_iterations//iterations
+
+# binary_lsearch
+# a function top find the minimum k_r for which the L_RI achieves
+# a given success rate
+# given:
+#   k_min, k_max: the parameter range to search
+#   c1, c2: the parameters of the L_RI automaton
+#   desired_success: the accuracy that we want to achieve
+# returns:
+#   a pair consisting of the k_r found and the number of iterations
+#   that the model runs for when using that k_r
+def binary_lsearch(k_min, k_max, c1, c2, desired_success):
+    iterations = 1000
+    convergence_threshold = 0.98
     
-def binary_lsearch(lambda_min, lambda_max, c1, c2, threshold):
-    # create and run the L_RI for the minimum lambda
-    a1 = L_RI(c1, c2, lambda_min)
-    a1.run_until(threshold, 0)
-    # create and run the L_RI for the maximum lambda
-    a2 = L_RI(c1, c2, lambda_max)
-    a2.run_until(threshold, 0)
-    # are we done searching?
-    if lambda_max - lambda_min < 0.01:
-        # yes, which one had fewer iterations
-        if a1.iterations < a2.iterations:
-            # the lower bound
-            return lambda_min, a1.iterations
+    while k_max - k_min > 0.001:
+        k_mid = (k_min + k_max)/2
+        accuracy,_ = get_success_rate(c1, c2, k_mid, iterations, convergence_threshold)
+        if accuracy > desired_success:
+            k_max = k_mid
         else:
-            # the upper bound
-            return lambda_max, a2.iterations
-    # the lambdas haven't converged yet
-    # which one produced few iterations?
-    if a1.iterations < a2.iterations:
-        # the lower bound
-        return binary_lsearch(lambda_min, lambda_max - (lambda_max - lambda_min)/2.0, c1, c2, threshold)
-    else:
-        # the upper bound
-        return binary_lsearch(lambda_min + (lambda_max - lambda_min)/2.0, lambda_max, c1, c2, threshold)
+            k_min = k_mid
+    return (k_min + k_max)/2, get_success_rate(c1, c2, (k_min + k_max)/2, iterations, convergence_threshold)[1]
 
 _c2 = 0.70
-_lambda_min = 0.1
-_lambda_max = 0.9
-_threshold = 0.99
+_k_min = 0.001
+_k_max = 0.999
+_desired_success = 0.95
+_ensembles = 100
 for i in range(0, 7):
-    lambdas = 0
-    iters = 0
+    _k_total = 0
+    _n_total = 0
     _c1 = 0.05 + i/10.0
-    for j in range(0, 10000):
-        l, n = binary_lsearch(_lambda_min, _lambda_max, _c1, _c2, _threshold)
-        lambdas += l
-        iters += n
-    print("L_RI optimal lambda_r is {:.3f} for c1={:.2f}, c2={:.2f} in {:d} iterations"\
-              .format(lambdas/(j+1), _c1, _c2, iters//(j+1)))
-              
-count = [0,0]
-its = 0
-for i in range(0,1000):
-    a = L_RI(0.65, 0.70, 0.86)
-    a.run_until(0.98, 0)
-    if a.p1 > a.p2:
-        count[0] += 1
-    else:
-        count[1] += 1
-    its += a.iterations
-print(count[0], count[1], its/1000)
+    for j in range(0, _ensembles):
+        _k_optimal, n = binary_lsearch(_k_min, _k_max, _c1, _c2, _desired_success)
+        _k_total += _k_optimal
+        _n_total += n
+    print("L_RI optimal k_r is {:.3f} for c1={:.2f}, c2={:.2f} in {:d} iterations"\
+              .format(_k_total/_ensembles, _c1, _c2, _n_total//_ensembles))
 print("######################################################################################################")
